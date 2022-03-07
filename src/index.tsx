@@ -5,17 +5,10 @@ import "./assets/bootstrap.min.css";
 import { IPeople, IPlanet, IStarship } from "swapi-ts";
 import SwapiService from "./services/swapi-service";
 import App from "./components/app";
-//import { PersoneType } from "./types";
-//import { SwapiService } from "./swapi-service";
-//https://swapi.dev/api/
+// import { PersoneType } from "./types";
+// import { SwapiService } from "./swapi-service";
+// https://swapi.dev/api/
 
-console.log('Hello worls')
+console.log("Hello worls");
 
-
-ReactDOM.render(<App />,
-    document.getElementById('root'));
-
-const api = new SwapiService()
-api.getStarship('3').then((people)=>{
-console.log(people.name)
-})
+ReactDOM.render(<App />, document.getElementById("root"));
