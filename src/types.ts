@@ -22,9 +22,28 @@
 // }
 
 export interface IrandomPlanet {
-  id: string | null;
+  id?: string | number| null;
   name: string | null;
   population: string | null;
   rotationPeriod: string | null;
   diameter: string | null;
+}
+
+export interface ITransfomedPerson {
+  id?: string | number| null;
+  name: string | null;
+  gender: string,
+  birthYear: string,
+  eyeColor: string
+}
+export interface ITransfomedStarship {
+  id?: string | number| null;
+  name: string | null;
+  model: string,
+  manufacturer: string,
+  costInCredits: string,
+  length: string,
+  crew: string,
+  passengers: string,
+  cargoCapacity: string
 }

@@ -1,8 +1,18 @@
 import { IPeople, IPlanet, IStarship } from "swapi-ts";
+import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../types";
 
 // https://swapi.dev/api/
 export default class SwapiService {
   readonly apiBase = `https://swapi.dev/api`;
+  extractId(item:IPlanet | IPeople | IStarship){
+    const idRegExp = /\/([0-9]*)\/$/;
+    const idMatch = item.url.match(idRegExp);
+      let id;
+    if(idMatch != null){
+     id =  idMatch[1]
+    }
+    return id
+  }
 
   async getResource(url = ""): Promise<any> {
     const res = await fetch(`${this.apiBase}${url}`);
@@ -14,36 +24,75 @@ export default class SwapiService {
     return res.json();
   }
 
-  async getAllPeople(): Promise<IPeople[]> {
+  //------------PEOPLE------------
+  async getAllPeople(): Promise<ITransfomedPerson[]> {
     const res = await this.getResource(`/people/`);
     const people: IPeople[] = res.results;
-    return people;
+    return people.map(this.transformPerson);
   }
 
-  async getPersone(id: string): Promise<IPeople> {
+  async getPersone(id: string): Promise<ITransfomedPerson> {
     const persone: IPeople = await this.getResource(`/people/${id}/`);
-    return persone;
+    return this.transformPerson(persone);
   }
 
-  async getAllPlanets(): Promise<IPlanet[]> {
+  transformPerson(person:IPeople):ITransfomedPerson {
+    return {
+      id: this.extractId(person),
+      name: person.name,
+      gender: person.gender,
+      birthYear: person.birth_year,
+      eyeColor: person.eye_color
+    }
+  }
+
+//------------PLANET-------------
+  async getAllPlanets():Promise<IrandomPlanet[]> {
     const res = await this.getResource(`/planets/`);
-    const panets: IPlanet[] = res.results;
-    return panets;
+    const planets: IPlanet[] = res.results;
+    return planets.map(this.transformPlanet);
   }
 
-  async getPlanet(id: string | number): Promise<IPlanet> {
-    const panet: IPlanet = await this.getResource(`/planets/${id}/`);
-    return panet;
+  async getPlanet(id: string | number):Promise<IrandomPlanet> {
+    const planet: IPlanet = await this.getResource(`/planets/${id}/`);
+    return this.transformPlanet(planet);
+
   }
 
-  async getAllStarships(): Promise<IStarship[]> {
+  transformPlanet(planet:IPlanet):IrandomPlanet{
+    const id = this.extractId(planet)
+        return {
+          id,
+          name: planet.name,
+          population: planet.population,
+          rotationPeriod: planet.rotation_period,
+          diameter: planet.diameter
+        }
+    }
+
+//------------STARSHIP-------------
+  async getAllStarships(): Promise<ITransfomedStarship[]> {
     const res = await this.getResource(`/starships/`);
     const starships: IStarship[] = res.results;
-    return starships;
+    return starships.map(this.transformStarship);
   }
 
-  async getStarship(id: string): Promise<IStarship> {
+  async getStarship(id: string): Promise<ITransfomedStarship> {
     const starship: IStarship = await this.getResource(`/starships/${id}/`);
-    return starship;
+    return this.transformStarship(starship);
   }
+
+  transformStarship(starship:IStarship):ITransfomedStarship{
+        return {
+          id:this.extractId(starship),
+          name: starship.name,
+          model: starship.model,
+          manufacturer: starship.manufacturer,
+          costInCredits: starship.cost_in_credits,
+          length: starship.length,
+          crew: starship.crew,
+          passengers: starship.passengers,
+          cargoCapacity: starship.cargo_capacity
+        }
+    }
 }

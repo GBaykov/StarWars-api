@@ -21,23 +21,25 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
   }
 
   updatePlanet(): void {
-    this.swapiService.getPlanet(2).then((planet) => {
+    const id = 12;
+    this.swapiService.getPlanet(id).then((planet) => {
       this.setState({
+        id:planet.id,
         name: planet.name,
         population: planet.population,
-        rotationPeriod: planet.rotation_period,
+        rotationPeriod: planet.rotationPeriod,
         diameter: planet.diameter
       });
     });
   }
 
   render(): JSX.Element {
-    const { name, population, rotationPeriod, diameter } = this.state;
+    const { id, name, population, rotationPeriod, diameter } = this.state;
     return (
       <div className="random-planet jumbotron rounded">
         <img
           className="planet-image"
-          src="https://starwars-visualguide.com/assets/img/planets/5.jpg"
+          src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
         />
         <div>
           <h4>{name}</h4>
