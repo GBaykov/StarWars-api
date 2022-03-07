@@ -1,5 +1,5 @@
 {
-  "name": "react-project",
+  "name": "star-wars-db",
   "main": "index.ts",
   "scripts": {
     "build": "npm run lint && webpack --mode production",
@@ -53,6 +53,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
-    "react-transition-group": "^4.4.2"
+    "react-transition-group": "^4.4.2",
+    "swapi-ts": "^1.0.1"
   }
 }
