@@ -27,6 +27,8 @@ export interface IrandomPlanet {
   population: string | null;
   rotationPeriod: string | null;
   diameter: string | null;
+  loading?:boolean,
+  error?:boolean
 }
 
 export interface ITransfomedPerson {
