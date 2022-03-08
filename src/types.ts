@@ -55,5 +55,5 @@ export interface IItemListState{
 }
 
 export interface IItemListProps{
-  onItemSelected:(id?:string | null | number | undefined )=>void //id?:string | null | number | undefined,
+  onItemSelected:(id?:string | null )=>void //id?:string | null | number | undefined,
 }

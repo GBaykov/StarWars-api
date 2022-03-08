@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { IPeople } from "swapi-ts";
 import SwapiService from "../../services/swapi-service";
 import { ITransfomedPerson } from "../../types";
+import ErrorButton from "../error-button";
 import Spinner from "../spinner";
 
 import "./person-details.css";
@@ -25,7 +26,7 @@ export default class PersonDetails extends Component<IPersonDetailProp, IPersone
   swapiService = new SwapiService();
   
   componentDidMount(){
-    //this.updatePersone()
+    this.updatePersone()
   }
   componentDidUpdate(prevProps:IPersonDetailProp){
     if(prevProps.personId !== this.props.personId){
@@ -39,7 +40,6 @@ export default class PersonDetails extends Component<IPersonDetailProp, IPersone
     
     this.swapiService.getPersone(personId)
     .then((persone)=>{
-      console.log(persone)
       this.setState({persone, loading:false})
     })
   }
@@ -94,6 +94,7 @@ const PersonView = (props:IPersoneDetailState) => {
               <span>{eyeColor}</span>
             </li>
           </ul>
+          <ErrorButton />
         </div>
     </React.Fragment>
   )

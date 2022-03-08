@@ -21,22 +21,8 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
 
   constructor(props: {}) {
     super(props);
-    
-  }
-  componentDidMount(){
-    this.updatePlanet();
-    // this.interval = setInterval(this.updatePlanet(), 3500)
-    // clearInterval(this.interval)
-    setInterval(this.updatePlanet, 3500)
-  }
 
-  onError = () => {
-    this.setState({
-      error:true,
-      loading:false
-    })
   }
-
   updatePlanet =()=> {
     const id = Math.floor(Math.random()*19)+3;
     this.swapiService.getPlanet(id)
@@ -53,12 +39,33 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
     })
     .catch(this.onError)
   }
+
+  interval:NodeJS.Timer = setInterval(this.updatePlanet, 3500)
+
+  componentDidMount(){
+    this.updatePlanet();
+     this.interval 
+    // clearInterval(this.interval)
+    //setInterval(this.updatePlanet, 3500)
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.interval)
+  }
+
+  onError = () => {
+    this.setState({
+      error:true,
+      loading:false
+    })
+  }
+
+
   
   render(): JSX.Element {
     const { id, name, population, rotationPeriod, diameter, loading, error } = this.state;
     const errorMessage = error ? <ErrorIndicator/> : null
     const spinner = loading ? <Spinner/> : null;
-    const contentProp:IrandomPlanet = { id, name, population, rotationPeriod, diameter, loading }
     const content = (!loading && !error) ? <PlanetView  id={id} name={name} population={population} rotationPeriod={rotationPeriod} diameter={diameter}/> : null;
     
     return (
