@@ -32,7 +32,7 @@ export interface IrandomPlanet {
 }
 
 export interface ITransfomedPerson {
-  id?: string | number| null;
+  id: string | null;
   name: string | null;
   gender: string,
   birthYear: string,
@@ -48,4 +48,12 @@ export interface ITransfomedStarship {
   crew: string,
   passengers: string,
   cargoCapacity: string
+}
+
+export interface IItemListState{
+  peopleList:ITransfomedPerson[] | null
+}
+
+export interface IItemListProps{
+  onItemSelected:(id?:string | null | number | undefined )=>void //id?:string | null | number | undefined,
 }

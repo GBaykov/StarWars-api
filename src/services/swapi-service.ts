@@ -7,9 +7,9 @@ export default class SwapiService {
   extractId(item:IPlanet | IPeople | IStarship){
     const idRegExp = /\/([0-9]*)\/$/;
     const idMatch = item.url.match(idRegExp);
-      let id;
+      let id:string = "";
     if(idMatch != null){
-     id =  idMatch[1]
+     id +=idMatch[1]
     }
     return id
   }
@@ -31,12 +31,12 @@ export default class SwapiService {
     return people.map(this.transformPerson);
   }
 
-  async getPersone(id: string): Promise<ITransfomedPerson> {
+  async getPersone(id: string | null): Promise<ITransfomedPerson> {
     const persone: IPeople = await this.getResource(`/people/${id}/`);
     return this.transformPerson(persone);
   }
 
-  transformPerson(person:IPeople):ITransfomedPerson {
+  transformPerson=(person:IPeople):ITransfomedPerson =>{
     return {
       id: this.extractId(person),
       name: person.name,
@@ -59,7 +59,7 @@ export default class SwapiService {
 
   }
 
-  transformPlanet(planet:IPlanet):IrandomPlanet{
+  transformPlanet=(planet:IPlanet):IrandomPlanet=>{
     const id = this.extractId(planet)
         return {
           id,
@@ -82,7 +82,7 @@ export default class SwapiService {
     return this.transformStarship(starship);
   }
 
-  transformStarship(starship:IStarship):ITransfomedStarship{
+  transformStarship=(starship:IStarship):ITransfomedStarship=>{
         return {
           id:this.extractId(starship),
           name: starship.name,

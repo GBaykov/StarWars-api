@@ -21,7 +21,13 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
 
   constructor(props: {}) {
     super(props);
+    
+  }
+  componentDidMount(){
     this.updatePlanet();
+    // this.interval = setInterval(this.updatePlanet(), 3500)
+    // clearInterval(this.interval)
+    setInterval(this.updatePlanet, 3500)
   }
 
   onError = () => {
@@ -31,8 +37,8 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
     })
   }
 
-  updatePlanet(): void {
-    const id = 12;
+  updatePlanet =()=> {
+    const id = Math.floor(Math.random()*19)+3;
     this.swapiService.getPlanet(id)
     .then((planet) => {
       this.setState({
