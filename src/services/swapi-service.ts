@@ -3,8 +3,10 @@ import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../types"
 
 // https://swapi.dev/api/
 export default class SwapiService {
+
   readonly apiBase = `https://swapi.dev/api`;
-  extractId(item:IPlanet | IPeople | IStarship){
+
+  extractId = (item:IPlanet | IPeople | IStarship)=>{
     const idRegExp = /\/([0-9]*)\/$/;
     const idMatch = item.url.match(idRegExp);
       let id:string = "";
@@ -25,13 +27,13 @@ export default class SwapiService {
   }
 
   //------------PEOPLE------------
-  async getAllPeople(): Promise<ITransfomedPerson[]> {
+   getAllPeople = async(): Promise<ITransfomedPerson[]> =>{
     const res = await this.getResource(`/people/`);
     const people: IPeople[] = res.results;
     return people.map(this.transformPerson);
   }
 
-  async getPersone(id: string | null): Promise<ITransfomedPerson> {
+   getPersone = async(id: string | null): Promise<ITransfomedPerson>=> {
     const persone: IPeople = await this.getResource(`/people/${id}/`);
     return this.transformPerson(persone);
   }
@@ -47,13 +49,13 @@ export default class SwapiService {
   }
 
 //------------PLANET-------------
-  async getAllPlanets():Promise<IrandomPlanet[]> {
+   getAllPlanets = async():Promise<IrandomPlanet[]> =>{
     const res = await this.getResource(`/planets/`);
     const planets: IPlanet[] = res.results;
     return planets.map(this.transformPlanet);
   }
 
-  async getPlanet(id: string | number):Promise<IrandomPlanet> {
+   getPlanet = async(id: string | number):Promise<IrandomPlanet>=> {
     const planet: IPlanet = await this.getResource(`/planets/${id}/`);
     return this.transformPlanet(planet);
 
@@ -71,13 +73,13 @@ export default class SwapiService {
     }
 
 //------------STARSHIP-------------
-  async getAllStarships(): Promise<ITransfomedStarship[]> {
+   getAllStarships = async(): Promise<ITransfomedStarship[]> =>{
     const res = await this.getResource(`/starships/`);
     const starships: IStarship[] = res.results;
     return starships.map(this.transformStarship);
   }
 
-  async getStarship(id: string): Promise<ITransfomedStarship> {
+   getStarship = async (id: string): Promise<ITransfomedStarship> =>{
     const starship: IStarship = await this.getResource(`/starships/${id}/`);
     return this.transformStarship(starship);
   }

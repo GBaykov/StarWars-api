@@ -22,7 +22,7 @@
 // }
 
 export interface IrandomPlanet {
-  id?: string | number| null;
+  id?: string |  null;
   name: string | null;
   population: string | null;
   rotationPeriod: string | null;
@@ -39,7 +39,7 @@ export interface ITransfomedPerson {
   eyeColor: string
 }
 export interface ITransfomedStarship {
-  id?: string | number| null;
+  id?: string |  null;
   name: string | null;
   model: string,
   manufacturer: string,
@@ -51,9 +51,10 @@ export interface ITransfomedStarship {
 }
 
 export interface IItemListState{
-  peopleList:ITransfomedPerson[] | null
+  itemList:ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[] | null
 }
 
 export interface IItemListProps{
   onItemSelected:(id?:string | null )=>void //id?:string | null | number | undefined,
+  getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
 }

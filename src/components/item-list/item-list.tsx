@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { IPeople } from "swapi-ts";
 import SwapiService from "../../services/swapi-service";
-import { IItemListProps, IItemListState, ITransfomedPerson } from "../../types";
+import { IItemListProps, IItemListState, IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../../types";
 import Spinner from "../spinner";
 import "./item-list.css";
 
@@ -11,30 +11,32 @@ import "./item-list.css";
 export default class ItemList extends Component< IItemListProps, IItemListState > {
  
   state={
-    peopleList:null 
+    itemList:null 
   }
 
-  swapiService = new SwapiService;
-  
+  //swapiService = new SwapiService;
+
   componentDidMount(){
-    this.swapiService.getAllPeople()
-    .then((peopleList)=>{
+    //this.swapiService.getAllPeople()
+    const {getData} = this.props;
+    getData()
+    .then((itemList)=>{
       this.setState({
-        peopleList
+        itemList
       })
     })
   }
 
-  RenderItem (arr:ITransfomedPerson[] | null){
+  RenderItem (arr:ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[] | null){
     if(arr){
-      return arr.map((persone)=>{
+      return arr.map((item)=>{
         return(
             <li 
         className="list-group-item"
-        key={persone.id}
-        onClick={()=>this.props.onItemSelected(persone.id)}
+        key={item.id}
+        onClick={()=>this.props.onItemSelected(item.id)}
         >
-          {persone.name}
+          {item.name}
           </li>
         )        
       })
@@ -42,11 +44,11 @@ export default class ItemList extends Component< IItemListProps, IItemListState 
   }
 
   render(): JSX.Element {
-    const {peopleList} = this.state;
-    if (!peopleList) {
+    const {itemList} = this.state;
+    if (!itemList) {
       return <Spinner/>
     }
-    const items = this.RenderItem(peopleList)
+    const items = this.RenderItem(itemList)
     return (
       <ul className="item-list list-group">
      {items}
