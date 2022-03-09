@@ -8,9 +8,28 @@ import './people-page.css';
 import SwapiService from '../../services/swapi-service';
 import { IPeoplePageProps, IPeoplePageState, IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from '../../types';
 import Row from '../row';
+import ErrorBoundry from '../error-boundry';
 
 
+// class ErrorBoundry extends Component {
 
+//   state = {
+//     hasError: false
+//   };
+
+//   componentDidCatch() {
+//     this.setState({
+//       hasError: true
+//     });
+//   }
+
+//   render(){
+//     if(this.state.hasError){
+//       return (<ErrorIndicator/>)
+//     }
+//     return this.props.children
+//   }
+// }
 
 export default class PeoplePage extends Component<IPeoplePageState,IPeoplePageProps> {
   swapiService = new SwapiService()
@@ -19,12 +38,7 @@ export default class PeoplePage extends Component<IPeoplePageState,IPeoplePagePr
     hasError: false
   };
 
-  componentDidCatch(error:Error, info:React.ErrorInfo) {
-
-    this.setState({
-      hasError: true
-    });
-  }
+ 
 
   onPersonSelected = (selectedPerson?:string | null) => {
     this.setState({ selectedPerson });
@@ -43,19 +57,16 @@ export default class PeoplePage extends Component<IPeoplePageState,IPeoplePagePr
       }/>
     )
     const personeDetails:JSX.Element = (
+      <ErrorBoundry>
       <PersonDetails personId={this.state.selectedPerson} />
+      </ErrorBoundry>
     )
 
     return (
-      <Row left={itemList} right={personeDetails}/>
-      // <div className="row mb2">
-      //   <div className="col-md-6">
-      //     {itemList}
-      //   </div>
-      //   <div className="col-md-6">
-      //   {personeDetails}
-      //   </div>
-      // </div>
+      
+        <Row left={itemList} right={personeDetails}/>
+      
+      
     );
   }
 }
