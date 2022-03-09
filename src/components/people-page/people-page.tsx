@@ -6,14 +6,11 @@ import ErrorIndicator from '../error-indicator/error-indicator';
 
 import './people-page.css';
 import SwapiService from '../../services/swapi-service';
+import { IPeoplePageProps, IPeoplePageState, IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from '../../types';
+import Row from '../row';
 
-export interface IPeoplePageProps{
 
-}
-export interface IPeoplePageState{
-  selectedPerson?:string | null,
-  hasError?:boolean
-}
+
 
 export default class PeoplePage extends Component<IPeoplePageState,IPeoplePageProps> {
   swapiService = new SwapiService()
@@ -39,16 +36,26 @@ export default class PeoplePage extends Component<IPeoplePageState,IPeoplePagePr
       return <ErrorIndicator />;
     }
 
+    const itemList:JSX.Element = (
+      <ItemList onItemSelected={this.onPersonSelected} 
+      getData={this.swapiService.getAllPeople}
+      renderItem={(item)=> {return `${item.name} (${item.gender}, ${item.birthYear})`}
+      }/>
+    )
+    const personeDetails:JSX.Element = (
+      <PersonDetails personId={this.state.selectedPerson} />
+    )
+
     return (
-      <div className="row mb2">
-        <div className="col-md-6">
-          <ItemList onItemSelected={this.onPersonSelected} 
-          getData={this.swapiService.getAllPeople}/>
-        </div>
-        <div className="col-md-6">
-          <PersonDetails personId={this.state.selectedPerson} />
-        </div>
-      </div>
+      <Row left={itemList} right={personeDetails}/>
+      // <div className="row mb2">
+      //   <div className="col-md-6">
+      //     {itemList}
+      //   </div>
+      //   <div className="col-md-6">
+      //   {personeDetails}
+      //   </div>
+      // </div>
     );
   }
 }

@@ -30,13 +30,15 @@ export default class ItemList extends Component< IItemListProps, IItemListState 
   RenderItem (arr:ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[] | null){
     if(arr){
       return arr.map((item)=>{
+        const {id}= item;
+        const label = this.props.renderItem(item)
         return(
             <li 
         className="list-group-item"
         key={item.id}
-        onClick={()=>this.props.onItemSelected(item.id)}
+        onClick={()=>this.props.onItemSelected(id)}
         >
-          {item.name}
+          {label}
           </li>
         )        
       })

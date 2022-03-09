@@ -21,7 +21,7 @@
 //     prop:string
 // }
 
-export interface IrandomPlanet {
+export type IrandomPlanet ={
   id?: string |  null;
   name: string | null;
   population: string | null;
@@ -57,4 +57,13 @@ export interface IItemListState{
 export interface IItemListProps{
   onItemSelected:(id?:string | null )=>void //id?:string | null | number | undefined,
   getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
+  renderItem:(item:any)=>string | undefined
+}
+
+export interface IPeoplePageProps{
+
+}
+export interface IPeoplePageState{
+  selectedPerson?:string | null,
+  hasError?:boolean
 }
