@@ -11,4 +11,4 @@ import App from "./components/app";
 
 console.log("Hello worls");
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App showRandomPlanet={true} hasError={false}/>, document.getElementById("root"));

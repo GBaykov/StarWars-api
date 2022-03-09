@@ -5,6 +5,7 @@ import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../types"
 export default class SwapiService {
 
   readonly apiBase = `https://swapi.dev/api`;
+  imageBase = 'https://starwars-visualguide.com/assets/img'
 
   extractId = (item:IPlanet | IPeople | IStarship)=>{
     const idRegExp = /\/([0-9]*)\/$/;
@@ -25,6 +26,18 @@ export default class SwapiService {
     }
     return res.json();
   }
+
+  getPersonImage = ({id}:ITransfomedPerson | ITransfomedStarship | IrandomPlanet ) => {
+    return `${this.imageBase}/characters/${id}.jpg`
+  };
+
+  getStarshipImage = ({id}:ITransfomedPerson | ITransfomedStarship | IrandomPlanet ) => {
+    return `${this.imageBase}/starships/${id}.jpg`
+  };
+
+  getPlanetImage = ({id}:ITransfomedPerson | ITransfomedStarship | IrandomPlanet ) => {
+    return `${this.imageBase}/planets/${id}.jpg`
+  };
 
   //------------PEOPLE------------
    getAllPeople = async(): Promise<ITransfomedPerson[]> =>{

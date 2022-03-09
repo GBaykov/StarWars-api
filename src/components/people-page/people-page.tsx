@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ItemList from '../item-list/item-list';
-import PersonDetails from '../person-details/person-details';
+import ItemDetails from '../item-details/item-details';
 import ErrorIndicator from '../error-indicator/error-indicator';
 
 import './people-page.css';
@@ -58,7 +58,7 @@ export default class PeoplePage extends Component<IPeoplePageState,IPeoplePagePr
     )
     const personeDetails:JSX.Element = (
       <ErrorBoundry>
-      <PersonDetails personId={this.state.selectedPerson} />
+      <ItemDetails personId={this.state.selectedPerson} />
       </ErrorBoundry>
     )
 
