@@ -10,6 +10,8 @@ import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
 import Row from "../row";
+import { Record } from "../item-details/item-details";
+
 
  interface IAppState{
   showRandomPlanet: boolean,
@@ -45,17 +47,26 @@ swapiService = new SwapiService()
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
-const {getPersone, getStarship, getPersonImage, getStarshipImage, getPlanetImage}= this.swapiService
+const {getPersone, getStarship, getPersonImage, getStarshipImage, getPlanetImage}= this.swapiService;
+
     const personeDetails = (
       <ItemDetails personId={'11'} 
                   getData={getPersone}
-                  getImageUrl={getPersonImage}/>
+                  getImageUrl={getPersonImage}>
+                  <Record field='gender' label="Gender"/>
+                  <Record field='eyeColour' label="Eye Colour"/>
+      </ItemDetails>
     )
+
     const starshipDetails = (
       <ItemDetails 
                   personId={'5'} 
                   getData={getStarship} 
-                  getImageUrl={getStarshipImage}/>
+                  getImageUrl={getStarshipImage}>
+                    <Record field='model' label="Model"/>
+                    <Record field='length' label="Length"/>
+                    <Record field='costInCredits' label="Cost"/>
+      </ItemDetails>
     )
 
     return(
