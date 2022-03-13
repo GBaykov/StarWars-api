@@ -4,7 +4,7 @@ import RandomPlanet from "../random-planet";
 import ItemList from "../item-list";
 import ItemDetails from "../item-details";
 import "./app.css";
-import PeoplePage from "../people-page";
+// import PeoplePage from "../people-page";
 import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-service";
@@ -57,7 +57,13 @@ swapiService = new SwapiService()
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
-const {getPersone, getStarship, getPersonImage, getStarshipImage, getPlanetImage}= this.swapiService;
+    const { getPersone,
+      getStarship,
+      getPersonImage,
+      getStarshipImage,
+      getAllPeople,
+      getAllPlanets,
+      getAllStarships } = this.swapiService;
 
     // const personeDetails = (
     //   <ItemDetails itemId={'11'} 
@@ -95,18 +101,25 @@ const {getPersone, getStarship, getPersonImage, getStarshipImage, getPlanetImage
           </button>
           <ErrorButton />
       </div>
-      <PeoplePage/>
       <PersonDetails id={"11"} />
 
 <PlanetDetails id={"5"} />
 
 <StarshipDetails id={"9"} />
 
-<PersonList />
+<PersonList getData={getAllPeople}>
+{ (item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => <span>{item.name}</span> }
+  </PersonList>
 
-<StarshipList />
+<StarshipList getData={getAllStarships}>
+{ (item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => <span>{item.name}</span> }
+  </StarshipList>
 
-<PlanetList />
+<PlanetList getData={getAllPlanets}>
+{ (item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => <span>{item.name}</span> }
+</PlanetList>
+
+
       {/* <div className="row mb2">
         <div className="col-md-6">
           <ItemList onItemSelected={() => {}} 

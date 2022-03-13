@@ -8,7 +8,7 @@ export interface IwithData{
   getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
 }
 
-const withData = ( View:any, getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>) => {
+const withData = ( View:any, getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>):any => {
   return class extends Component {
 
     state = {
@@ -30,7 +30,7 @@ const withData = ( View:any, getData:()=>Promise<ITransfomedPerson[] |  IrandomP
       if (!data) {
         return <Spinner />;
       }
-
+console.log(this.props.children)
       return <View {...this.props} data={data} />;
     }
   };

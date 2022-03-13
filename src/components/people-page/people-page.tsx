@@ -11,62 +11,44 @@ import Row from '../row';
 import ErrorBoundry from '../error-boundry';
 
 
-// class ErrorBoundry extends Component {
 
+
+// export default class PeoplePage extends Component<IPeoplePageState,IPeoplePageProps> {
+//   swapiService = new SwapiService()
 //   state = {
+//     selectedPerson: "3",
 //     hasError: false
 //   };
 
-//   componentDidCatch() {
-//     this.setState({
-//       hasError: true
-//     });
-//   }
-
-//   render(){
-//     if(this.state.hasError){
-//       return (<ErrorIndicator/>)
-//     }
-//     return this.props.children
-//   }
-// }
-
-export default class PeoplePage extends Component<IPeoplePageState,IPeoplePageProps> {
-  swapiService = new SwapiService()
-  state = {
-    selectedPerson: "3",
-    hasError: false
-  };
-
  
 
-  onPersonSelected = (selectedPerson?:string | null) => {
-    this.setState({ selectedPerson });
-  };
+//   onPersonSelected = (selectedPerson?:string | null) => {
+//     this.setState({ selectedPerson });
+//   };
 
-  render() {
+//   render() {
 
-    if (this.state.hasError) {
-      return <ErrorIndicator />;
-    }
+//     if (this.state.hasError) {
+//       return <ErrorIndicator />;
+//     }
 
-    const itemList:JSX.Element = (
-      <ItemList onItemSelected={this.onPersonSelected} 
-      getData={this.swapiService.getAllPeople}
-      renderItem={(item)=> {return `${item.name} (${item.gender}, ${item.birthYear})`}
-      }/>
-    )
-    const personeDetails:JSX.Element = (
-      <ErrorBoundry>
-      <ItemDetails personId={this.state.selectedPerson} />
-      </ErrorBoundry>
-    )
+//     const itemList:JSX.Element = (
+//       <ItemList onItemSelected={this.onPersonSelected} 
+//       getData={this.swapiService.getAllPeople}
+//       renderItem={(item)=> {return `${item.name} (${item.gender}, ${item.birthYear})`}
+//       }/>
+//     )
+//     const personeDetails:JSX.Element = (
+//       <ErrorBoundry>
+//       <ItemDetails personId={this.state.selectedPerson} />
+//       </ErrorBoundry>
+//     )
 
-    return (
+//     return (
       
-        <Row left={itemList} right={personeDetails}/>
+//         <Row left={itemList} right={personeDetails}/>
       
       
-    );
-  }
-}
+//     );
+//   }
+// }
