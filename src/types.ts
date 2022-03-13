@@ -22,7 +22,7 @@
 // }
 
 export type IrandomPlanet ={
-  id?: string |  null;
+  id: string |  null;
   name: string | null;
   population: string | null;
   rotationPeriod: string | null;
@@ -39,7 +39,7 @@ export interface ITransfomedPerson {
   eyeColor: string
 }
 export interface ITransfomedStarship {
-  id?: string |  null;
+  id: string |  null;
   name: string | null;
   model: string,
   manufacturer: string,

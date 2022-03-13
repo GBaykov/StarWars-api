@@ -23,8 +23,8 @@ export const Record = ({ item, field, label }:IRecord) => {
 
 
 export interface IItemDetailProp{
-  personId:string | null,
-  getData?:(personId:string )=>Promise<any>,
+  itemId:string | null,
+  getData?:(itemId:string )=>Promise<any>,
   getImageUrl?:(item:ITransfomedPerson | ITransfomedStarship | IrandomPlanet )=>any,
 }
 
@@ -48,16 +48,16 @@ export default class ItemDetails extends Component<IItemDetailProp, IItemDetailS
     this.updateItem()
   }
   componentDidUpdate(prevProps:IItemDetailProp){
-    if(prevProps.personId !== this.props.personId){
+    if(prevProps.itemId !== this.props.itemId){
       this.updateItem()
     }
   }
   updateItem(){
     this.setState({ loading:true})
-    const {personId, getData, getImageUrl} = this.props;
-    if(!personId || !getData || !getImageUrl) return;
+    const {itemId, getData, getImageUrl} = this.props;
+    if(!itemId || !getData || !getImageUrl) return;
     
-    getData(personId)
+    getData(itemId)
     .then((item)=>{
       this.setState({
         item, 
@@ -67,7 +67,7 @@ export default class ItemDetails extends Component<IItemDetailProp, IItemDetailS
     })
   }
   render(): JSX.Element {
-    const {personId}:IItemDetailProp = this.props;
+    const {itemId}:IItemDetailProp = this.props;
     
     if(this.state.item == null){
       return <span>Select a persone from a list!</span>

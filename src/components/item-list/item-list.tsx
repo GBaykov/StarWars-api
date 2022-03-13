@@ -1,60 +1,95 @@
-import React, { Component } from "react";
+import React, { Component, ReactChild, ReactFragment, ReactPortal } from "react";
 import { IPeople } from "swapi-ts";
 import SwapiService from "../../services/swapi-service";
-import { IItemListProps, IItemListState, IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../../types";
+import { IItemListState, IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../../types";
 import Spinner from "../spinner";
 import "./item-list.css";
+import { withData } from '../hoc-helpers';
 
 
 
-
-export default class ItemList extends Component< IItemListProps, IItemListState > {
+// export default class ItemList extends Component< IItemListProps, IItemListState > {
  
-  state={
-    itemList:null 
-  }
+//   state={
+//     itemList:null 
+//   }
 
-  //swapiService = new SwapiService;
+//   //swapiService = new SwapiService;
 
-  componentDidMount(){
-    //this.swapiService.getAllPeople()
-    const {getData} = this.props;
-    getData()
-    .then((itemList)=>{
-      this.setState({
-        itemList
-      })
-    })
-  }
+//   componentDidMount(){
+//     //this.swapiService.getAllPeople()
+//     const {getData} = this.props;
+//     getData()
+//     .then((itemList)=>{
+//       this.setState({
+//         itemList
+//       })
+//     })
+//   }
 
-  RenderItem (arr:ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[] | null){
-    if(arr){
-      return arr.map((item)=>{
-        const {id}= item;
-        const label = this.props.renderItem(item)
-        return(
-            <li 
-        className="list-group-item"
-        key={item.id}
-        onClick={()=>this.props.onItemSelected(id)}
-        >
-          {label}
-          </li>
-        )        
-      })
-    }
-  }
+//   RenderItem (arr:ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[] | null){
+//     if(arr){
+//       return arr.map((item)=>{
+//         const {id}= item;
+//         const label = this.props.renderItem(item)
+//         return(
+//             <li 
+//         className="list-group-item"
+//         key={item.id}
+//         onClick={()=>this.props.onItemSelected(id)}
+//         >
+//           {label}
+//           </li>
+//         )        
+//       })
+//     }
+//   }
 
-  render(): JSX.Element {
-    const {itemList} = this.state;
-    if (!itemList) {
-      return <Spinner/>
-    }
-    const items = this.RenderItem(itemList)
-    return (
-      <ul className="item-list list-group">
-     {items}
-      </ul>
-    );
-  }
+//   render(): JSX.Element {
+//     const {itemList} = this.state;
+//     if (!itemList) {
+//       return <Spinner/>
+//     }
+//     const items = this.RenderItem(itemList)
+//     return (
+//       <ul className="item-list list-group">
+//      {items}
+//       </ul>
+//     );
+//   }
+// }
+
+export interface IItemListProps{
+  data:ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[],
+  onItemSelected:( )=> void //id?:string | null | number | undefined,
+  children:(item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship)=>ReactChild  ;
+  //renderItem:(item:any)=>string | undefined
 }
+
+const ItemList = (props:IItemListProps) => {
+
+  const { data, onItemSelected, children } = props;
+
+  const items = data.map((item) => {
+    const { id } = item;
+    const label = children(item) //renderLabel;
+
+    return (
+      <li className="list-group-item"
+          key={id}
+          onClick={() => onItemSelected()}>
+        {label}
+      </li>
+    );
+  });
+
+  return (
+    <ul className="item-list list-group">
+      {items}
+    </ul>
+  );
+};
+
+const { getAllPeople } = new SwapiService();
+
+export default ItemList

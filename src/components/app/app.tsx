@@ -11,6 +11,16 @@ import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
 import Row from "../row";
 import { Record } from "../item-details/item-details";
+import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../../types";
+
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList
+} from '../sw-components';
 
 
  interface IAppState{
@@ -49,35 +59,35 @@ swapiService = new SwapiService()
     }
 const {getPersone, getStarship, getPersonImage, getStarshipImage, getPlanetImage}= this.swapiService;
 
-    const personeDetails = (
-      <ItemDetails personId={'11'} 
-                  getData={getPersone}
-                  getImageUrl={getPersonImage}>
-                  <Record field='gender' label="Gender"/>
-                  <Record field='eyeColour' label="Eye Colour"/>
-      </ItemDetails>
-    )
+    // const personeDetails = (
+    //   <ItemDetails itemId={'11'} 
+    //               getData={getPersone}
+    //               getImageUrl={getPersonImage}>
+    //               <Record field='gender' label="Gender"/>
+    //               <Record field='eyeColour' label="Eye Colour"/>
+    //   </ItemDetails>
+    // )
 
-    const starshipDetails = (
-      <ItemDetails 
-                  personId={'5'} 
-                  getData={getStarship} 
-                  getImageUrl={getStarshipImage}>
-                    <Record field='model' label="Model"/>
-                    <Record field='length' label="Length"/>
-                    <Record field='costInCredits' label="Cost"/>
-      </ItemDetails>
-    )
+    // const starshipDetails = (
+    //   <ItemDetails 
+    //               itemId={'5'} 
+    //               getData={getStarship} 
+    //               getImageUrl={getStarshipImage}>
+    //                 <Record field='model' label="Model"/>
+    //                 <Record field='length' label="Length"/>
+    //                 <Record field='costInCredits' label="Cost"/>
+    //   </ItemDetails>
+    // )
 
     return(
       <ErrorBoundry>
       <div className="stardb-app">
       <Header />
-      <Row left={personeDetails} right={starshipDetails}/>
+      {/* <Row left={personeDetails} right={starshipDetails}/> */}
       {/* {planet} */}
       {/* <RandomPlanet /> закоменчено*/}  
 
-      {/* <div className="row mb2 button-row">
+      <div className="row mb2 button-row">
       <button
             className="toggle-planet btn btn-warning btn-lg"
             onClick={this.toggleRandomPlanet}>
@@ -85,20 +95,33 @@ const {getPersone, getStarship, getPersonImage, getStarshipImage, getPlanetImage
           </button>
           <ErrorButton />
       </div>
-      <PeoplePage/> */}
+      <PeoplePage/>
+      <PersonDetails id={"11"} />
 
+<PlanetDetails id={"5"} />
+
+<StarshipDetails id={"9"} />
+
+<PersonList />
+
+<StarshipList />
+
+<PlanetList />
       {/* <div className="row mb2">
         <div className="col-md-6">
-          <ItemList onItemSelected={this.onPersonSelected} 
+          <ItemList onItemSelected={() => {}} 
                     getData={this.swapiService.getAllPlanets}
-                    renderItem={(item)=>item.name}/>
+                    // renderItem={(item)=>item.name}
+                    >
+                      { (item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => <span>{item.name}</span> }
+                      </ItemList>
         </div>
         <div className="col-md-6">
           <ItemDetails personId={this.state.selectedPerson} />
         </div>
-      </div>
+      </div> */}
 
-      <div className="row mb2">
+      {/* <div className="row mb2">
         <div className="col-md-6">
           <ItemList onItemSelected={this.onPersonSelected} 
                     getData={this.swapiService.getAllStarships}
