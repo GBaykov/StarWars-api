@@ -101,49 +101,17 @@ swapiService = new SwapiService()
           </button>
           <ErrorButton />
       </div>
-      <PersonDetails id={"11"} />
+          <PersonDetails id={"11"} />
 
-<PlanetDetails id={"5"} />
+          <PlanetDetails id={"5"} />
 
-<StarshipDetails id={"9"} />
+          <StarshipDetails id={"9"} />
 
-<PersonList getData={getAllPeople}>
-{ (item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => <span>{item.name}</span> }
-  </PersonList>
+          <PersonList />
 
-<StarshipList getData={getAllStarships}>
-{ (item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => <span>{item.name}</span> }
-  </StarshipList>
+          <StarshipList />
 
-<PlanetList getData={getAllPlanets}>
-{ (item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => <span>{item.name}</span> }
-</PlanetList>
-
-
-      {/* <div className="row mb2">
-        <div className="col-md-6">
-          <ItemList onItemSelected={() => {}} 
-                    getData={this.swapiService.getAllPlanets}
-                    // renderItem={(item)=>item.name}
-                    >
-                      { (item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => <span>{item.name}</span> }
-                      </ItemList>
-        </div>
-        <div className="col-md-6">
-          <ItemDetails personId={this.state.selectedPerson} />
-        </div>
-      </div> */}
-
-      {/* <div className="row mb2">
-        <div className="col-md-6">
-          <ItemList onItemSelected={this.onPersonSelected} 
-                    getData={this.swapiService.getAllStarships}
-                    renderItem={(item)=>item.name}/>
-        </div>
-        <div className="col-md-6">
-          <ItemDetails personId={this.state.selectedPerson} />
-        </div>
-      </div> */}
+          <PlanetList />
     </div>
     </ErrorBoundry>
     )

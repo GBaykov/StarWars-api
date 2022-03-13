@@ -49,6 +49,25 @@ export interface ITransfomedStarship {
   passengers: string,
   cargoCapacity: string
 }
+export interface IUniversalTransomed{
+  id?: string |  null;
+  name?: string | null;
+  population?: string | null;
+  rotationPeriod?: string | null;
+  diameter?: string | null;
+  loading?:boolean,
+  error?:boolean,
+  model?: string,
+  manufacturer?: string,
+  costInCredits?: string,
+  length?: string,
+  crew?: string,
+  passengers?: string,
+  cargoCapacity?: string,
+  gender?: string,
+  birthYear?: string,
+  eyeColor?: string
+}
 
 export interface IItemListState{
   itemList:ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[] | null
