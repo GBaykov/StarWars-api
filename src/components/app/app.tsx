@@ -12,7 +12,7 @@ import ErrorBoundry from "../error-boundry";
 import Row from "../row";
 import { Record } from "../item-details/item-details";
 import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../../types";
-
+import { SwapiServiceProvider } from '../swapi-service-context';
 import {
   PersonDetails,
   PlanetDetails,
@@ -87,6 +87,7 @@ swapiService = new SwapiService()
 
     return(
       <ErrorBoundry>
+        <SwapiServiceProvider value={this.swapiService} >
       <div className="stardb-app">
       <Header />
       {/* <Row left={personeDetails} right={starshipDetails}/> */}
@@ -113,6 +114,7 @@ swapiService = new SwapiService()
 
           <PlanetList />
     </div>
+    </SwapiServiceProvider>
     </ErrorBoundry>
     )
 
