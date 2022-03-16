@@ -13,10 +13,12 @@ import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../../typ
 import { SwapiServiceProvider } from '../swapi-service-context';
 import {
   PersonDetails,
-  PlanetDetails,
-  StarshipDetails,
+  // PlanetDetails,
+  // StarshipDetails,
   PersonList,
+  PlanetDetails,
   PlanetList,
+  StarshipDetails,
   StarshipList
 } from '../sw-components';
 import { PeoplePage } from "../pages";
@@ -56,8 +58,8 @@ export default class App extends Component<IAppState, {}>{
             <Header />
               {planet}
               <PeoplePage/>
-              {/* <Row left={<PersonList />} right={<PersonDetails id={"11"} />} /> */}
-              <Row left={<PersonList />} right={<PlanetDetails id={"5"} />} />
+              <Row left={<PlanetList />} right={<PlanetDetails id={"11"} />} />
+
               <Row left={<PlanetList />} right={<StarshipDetails id={"9"} />} />
 
       <div className="row mb2 button-row">

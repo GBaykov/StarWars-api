@@ -52,7 +52,7 @@ export interface ITransfomedStarship {
   cargoCapacity: string
 }
 export interface IUniversalTransomed{
-  id?: string |  null;
+  itemId?: string |  null;
   name?: string | null;
   population?: string | null;
   rotationPeriod?: string | null;
@@ -90,6 +90,18 @@ export interface IPeoplePageState{
 }
 
 export interface Idetails{
-  id: string |  null;
+  itemId: string |  null;
   swapiService:SwapiService
 }
+export interface IItemDetailProp{
+  itemId:string | null,
+  getData:(itemId:string )=>Promise<any>,
+  getImageUrl:(item:ITransfomedPerson | ITransfomedStarship | IrandomPlanet )=>any,
+}
+
+export interface IItemDetails{
+  itemId: string |  null;
+   getData:((itemId: string) => Promise<any>) | undefined,
+    getImageUrl:((item: ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => any) | undefined
+}
+

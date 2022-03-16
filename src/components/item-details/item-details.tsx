@@ -1,7 +1,7 @@
 import React, { Component, cloneElement } from "react";
 import { IPeople } from "swapi-ts";
 import SwapiService from "../../services/swapi-service";
-import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../../types";
+import { IItemDetailProp, IItemDetails, IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../../types";
 import ErrorButton from "../error-button";
 import Spinner from "../spinner";
 
@@ -22,11 +22,7 @@ export const Record = ({ item, field, label }:IRecord) => {
 };
 
 
-export interface IItemDetailProp{
-  itemId:string | null,
-  getData?:(itemId:string )=>Promise<any>,
-  getImageUrl?:(item:ITransfomedPerson | ITransfomedStarship | IrandomPlanet )=>any,
-}
+
 
 export interface IItemDetailState {
   item: null | ITransfomedPerson,
@@ -34,7 +30,7 @@ export interface IItemDetailState {
   image?:string
 }
 
-export default class ItemDetails extends Component<IItemDetailProp, IItemDetailState> {
+export default class ItemDetails extends Component<IItemDetailProp | IItemDetails, IItemDetailState> {
 
   state={
     item:null,
@@ -47,7 +43,7 @@ export default class ItemDetails extends Component<IItemDetailProp, IItemDetailS
   componentDidMount(){
     this.updateItem()
   }
-  componentDidUpdate(prevProps:IItemDetailProp){
+  componentDidUpdate(prevProps:IItemDetailProp | IItemDetails){
     if(prevProps.itemId !== this.props.itemId 
       || prevProps.getData !== this.props.getData
       || prevProps.getImageUrl !== this.props.getImageUrl){
@@ -69,7 +65,7 @@ export default class ItemDetails extends Component<IItemDetailProp, IItemDetailS
     })
   }
   render(): JSX.Element {
-    const {itemId}:IItemDetailProp = this.props;
+    const {itemId}:IItemDetailProp | IItemDetails = this.props;
     
     if(this.state.item == null){
       return <span>Select a persone from a list!</span>
