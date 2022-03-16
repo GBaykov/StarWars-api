@@ -9,12 +9,16 @@ const withData = ( View:any):any => { //getData:()=>Promise<ITransfomedPerson[] 
       data: null
     };
 
-    // componentDidUpdate(prevProps:any){
-    //   if( prevProps.getData !== getData){
-    //     this.update()
-    //   }
-    // }
+    componentDidUpdate(prevProps:IWithSevice) {
+      if (this.props.getData !== prevProps.getData) {
+        this.update();
+      }
+    }
     componentDidMount() {
+      this.update();
+    }
+
+    update() {
       this.props.getData()
         .then((data) => {
           this.setState({

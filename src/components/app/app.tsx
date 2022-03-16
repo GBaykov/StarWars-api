@@ -52,9 +52,9 @@ export default class App extends Component<IAppState, {}>{
             <Header />
               {planet}
               <PeoplePage/>
-              <Row left={<PlanetList />} right={<PlanetDetails id={"11"} />} />
+              <Row left={<PlanetList />} right={<PlanetDetails itemId={"11"} />} />
 
-              <Row left={<PlanetList />} right={<StarshipDetails id={"9"} />} />
+              <Row left={<PlanetList />} right={<StarshipDetails itemId={"9"} />} />
 
       <div className="row mb2 button-row">
 

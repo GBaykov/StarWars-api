@@ -8,10 +8,10 @@ export default class PeoplePage extends Component {
     selectedItem: null
   };
 
- onItemSelected = (id?:string | null )=>{
-   console.log(id)
+ onItemSelected = (itemId?:string | null )=>{
+   console.log(itemId)
     this.setState({
-      selectedItem:id
+      selectedItem:itemId
     })
   }
 
@@ -21,7 +21,7 @@ export default class PeoplePage extends Component {
     return (
       <Row
         left={<PersonList onItemSelected={this.onItemSelected} />}
-        right={<PersonDetails id={selectedItem} />} />
+        right={<PersonDetails itemId={selectedItem} />} />
     );
   }
 
