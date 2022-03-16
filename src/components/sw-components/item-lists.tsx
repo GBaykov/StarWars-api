@@ -7,8 +7,8 @@ import {  IrandomPlanet, ITransfomedPerson, ITransfomedStarship, IUniversalTrans
 
 
 
-const withChildFunction = (Wrapped:any, 
-                           fn:(item: ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => JSX.Element) => {
+const withChildFunction = (fn:(item: ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => JSX.Element) => 
+                            (Wrapped:any)  => {
   
   return (props:any) => {
     return (
@@ -42,17 +42,24 @@ const mapStarshipMethodsToProps = (swapiService:SwapiService) => {
 };
 
 
-const PersonList = withSwapiService(
-  withData(withChildFunction(ItemList, renderName)),
-  mapPersonMethodsToProps);
+const PersonList =  withSwapiService(mapPersonMethodsToProps)(
+  withData(withChildFunction(renderName)(ItemList)))
 
-const PlanetList =  withSwapiService(
-  withData(withChildFunction(ItemList, renderName)),
-  mapPlanetMethodsToProps);
+  const PlanetList =  withSwapiService(mapPlanetMethodsToProps)(
+    withData(withChildFunction(renderName)(ItemList)))
+  
+  
+  const StarshipList = withSwapiService(mapStarshipMethodsToProps)(
+    withData(withChildFunction(renderModelAndName)(ItemList)))
+  
 
-const StarshipList = withSwapiService(
-    withData(withChildFunction(ItemList, renderModelAndName)),
-    mapStarshipMethodsToProps);
+// const PlanetList =  withSwapiService(
+//   withData(withChildFunction(ItemList, renderName)),
+//   mapPlanetMethodsToProps);
+
+// const StarshipList = withSwapiService(
+//     withData(withChildFunction(ItemList, renderModelAndName)),
+//     mapStarshipMethodsToProps);
 
 export {
   PersonList,
