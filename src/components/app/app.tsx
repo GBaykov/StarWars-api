@@ -2,27 +2,14 @@ import React, { Component } from "react";
 import Header from "../header";
 import RandomPlanet from "../random-planet";
 import "./app.css";
-import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
-import Row from "../row";
-
-
 import { SwapiServiceProvider } from '../swapi-service-context';
-import {
-  PlanetDetails,
-  PlanetList,
-  StarshipDetails,
-} from '../sw-components';
 import { PeoplePage, PlanetsPage, StarshipsPage } from "../pages";
+import { IAppState } from "../../types";
 
 
- interface IAppState{
-  showRandomPlanet: boolean,
-  hasError: boolean,
-  swapiService:SwapiService
- }
 
 export default class App extends Component<IAppState, {}>{
   state = {
@@ -54,10 +41,6 @@ export default class App extends Component<IAppState, {}>{
               <PeoplePage/>
               <PlanetsPage/>
               <StarshipsPage/>
-              {/* <Row left={<PlanetList />} right={<PlanetDetails itemId={"11"} />} />
-
-              <Row left={<PlanetList />} right={<StarshipDetails itemId={"9"} />} /> */}
-
       <div className="row mb2 button-row">
 
       </div>

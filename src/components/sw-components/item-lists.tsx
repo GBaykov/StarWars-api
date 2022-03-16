@@ -3,7 +3,7 @@ import ItemList from '../item-list';
 import { withData, withSwapiService } from '../hoc-helpers';
 import SwapiService from '../../services/swapi-service';
 import {  IrandomPlanet, ITransfomedPerson, ITransfomedStarship, IUniversalTransomed } from '../../types';
-import { IItemListProps } from '../item-list/item-list';
+
 
 
 

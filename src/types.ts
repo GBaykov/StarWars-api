@@ -1,28 +1,10 @@
-// export type PersoneType =  {
-//     name: string,
-//     height: string,
-//     mass: string,
-//     hair_color: string,
-//     skin_color: string,
-//     eye_color: string,
-//     birth_year: string,
-//     gender: string,
-//     homeworld: string,
-//     films: PersonsArrType[],
-//     species: [],
-//     vehicles: PersonsArrType[],
-//     starships: PersonsArrType[],
-//     created:string,
-//     edited: string,
-//     url: string,
 
 import SwapiService from "./services/swapi-service";
-
-// }
-// export type PersonsArrType = {
-//     prop:string
-// }
-
+export interface IAppState{
+  showRandomPlanet: boolean,
+  hasError: boolean,
+  swapiService:SwapiService
+ }
 export type IrandomPlanet ={
   itemId: string |  null;
   name: string | null;
@@ -76,7 +58,7 @@ export interface IItemListState{
 }
 
 export interface IItemListProps{
-  onItemSelected:(itemId?:string | null )=>void //id?:string | null | number | undefined,
+  onItemSelected:(itemId?:string | null )=>void 
   getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
   renderItem:(item:any)=>string | undefined
 }
