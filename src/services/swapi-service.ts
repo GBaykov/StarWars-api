@@ -46,7 +46,7 @@ export default class SwapiService {
     return people.map(this.transformPerson);
   }
 
-   getPersone = async(id: string | null): Promise<ITransfomedPerson>=> {
+   getPerson = async(id: string | null): Promise<ITransfomedPerson>=> {
     const persone: IPeople = await this.getResource(`/people/${id}/`);
     return this.transformPerson(persone);
   }

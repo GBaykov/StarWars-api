@@ -3,24 +3,22 @@ import React from 'react';
 import ItemDetails from '../item-details';
 import SwapiService from '../../services/swapi-service';
 import { Record } from '../item-details/item-details';
-import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from '../../types';
+import { Idetails, IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from '../../types';
 import { SwapiServiceConsumer } from '../swapi-service-context';
 
 
 
-interface Idetails{
-  id: string |  null;
-}
+
 const PersonDetails = ({id} :Idetails) => {
 
   return (
     <SwapiServiceConsumer>
       {
-        ({ getPersone, getPersonImage }) => {
+        ({ getPerson, getPersonImage }) => {
           return (
             <ItemDetails
               itemId={id}
-              getData={getPersone}
+              getData={getPerson}
               getImageUrl={getPersonImage} >
 
               <Record field="gender" label="Gender" />

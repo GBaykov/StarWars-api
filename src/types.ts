@@ -16,6 +16,8 @@
 //     edited: string,
 //     url: string,
 
+import SwapiService from "./services/swapi-service";
+
 // }
 // export type PersonsArrType = {
 //     prop:string
@@ -85,4 +87,9 @@ export interface IPeoplePageProps{
 export interface IPeoplePageState{
   selectedPerson?:string | null,
   hasError?:boolean
+}
+
+export interface Idetails{
+  id: string |  null;
+  swapiService:SwapiService
 }

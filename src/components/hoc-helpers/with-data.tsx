@@ -15,13 +15,21 @@ const withData = ( View:any, getData:()=>Promise<ITransfomedPerson[] |  IrandomP
       data: null
     };
 
+    componentDidUpdate(prevProps:any){
+      if( prevProps.getData !== getData){
+        this.update()
+      }
+    }
     componentDidMount() {
+      this.update()
+    }
+    update(){
       getData()
-        .then((data) => {
-          this.setState({
-            data
-          });
+      .then((data) => {
+        this.setState({
+          data
         });
+      });
     }
 
     render() {
@@ -30,7 +38,6 @@ const withData = ( View:any, getData:()=>Promise<ITransfomedPerson[] |  IrandomP
       if (!data) {
         return <Spinner />;
       }
-console.log(this.props.children)
       return <View {...this.props} data={data} />;
     }
   };
