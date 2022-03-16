@@ -8,7 +8,7 @@ export default class PlanetsPage extends Component {
     selectedItem: null
   };
 
-  onItemSelected = (selectedItem) => {
+  onItemSelected = (selectedItem:string | null) => {
     this.setState({ selectedItem });
   };
 

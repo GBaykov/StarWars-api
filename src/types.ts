@@ -110,6 +110,7 @@ export interface IwithData{
 }
 
 export interface IWithSevice {
+  itemId: string |  null;
   getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
   onItemSelected?:(itemId?:string | null )=>void
 }

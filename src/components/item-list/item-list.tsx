@@ -61,7 +61,7 @@ import { withData } from '../hoc-helpers';
 
 export interface IItemListProps{
   data:ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[],
-  onItemSelected:( )=> void //id?:string | null | number | undefined,
+  onItemSelected:(itemId:string | null )=> void //id?:string | null | number | undefined,
   children:(item:ITransfomedPerson | IrandomPlanet | ITransfomedStarship)=>ReactChild  ;
   //renderItem:(item:any)=>string | undefined
 }
@@ -77,7 +77,7 @@ const ItemList = (props:IItemListProps) => {
     return (
       <li className="list-group-item"
           key={itemId}
-          onClick={() => onItemSelected()}>
+          onClick={() => onItemSelected(itemId)}>
         {label}
       </li>
     );
@@ -90,6 +90,5 @@ const ItemList = (props:IItemListProps) => {
   );
 };
 
-const { getAllPeople } = new SwapiService();
 
 export default ItemList

@@ -9,7 +9,6 @@ export default class PeoplePage extends Component {
   };
 
  onItemSelected = (itemId?:string | null )=>{
-   console.log(itemId)
     this.setState({
       selectedItem:itemId
     })

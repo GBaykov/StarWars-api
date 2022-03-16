@@ -11,6 +11,7 @@ const withData = ( View:any):any => { //getData:()=>Promise<ITransfomedPerson[] 
 
     componentDidUpdate(prevProps:IWithSevice) {
       if (this.props.getData !== prevProps.getData) {
+        
         this.update();
       }
     }
@@ -29,7 +30,6 @@ const withData = ( View:any):any => { //getData:()=>Promise<ITransfomedPerson[] 
 
     render() {
       const { data } = this.state;
-
       if (!data) {
         return <Spinner />;
       }

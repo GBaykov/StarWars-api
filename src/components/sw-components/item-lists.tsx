@@ -7,11 +7,12 @@ import { IItemListProps } from '../item-list/item-list';
 
 
 
-const withChildFunction = (Wrapped:(props: IItemListProps) => JSX.Element, 
-fn:(item: ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => JSX.Element) => {
+const withChildFunction = (Wrapped:any, 
+                           fn:(item: ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => JSX.Element) => {
+  
   return (props:any) => {
     return (
-      <Wrapped {...props}>
+      <Wrapped  {...props}>
         {fn}
       </Wrapped>
     )
