@@ -75,7 +75,7 @@ export default class ItemDetails extends Component<IItemDetailProp | IItemDetail
 
     
     
-    const {id, name, gender,birthYear, eyeColor } = this.state.item;
+    const { name } = this.state.item;
     const {image, item } = this.state
     return (
       <div className="item-details card">

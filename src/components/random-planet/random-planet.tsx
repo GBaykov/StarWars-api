@@ -10,7 +10,7 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
   swapiService = new SwapiService();
 
   state = {
-    id: null,
+    itemId: null,
     name: null,
     population: null,
     rotationPeriod: null,
@@ -24,11 +24,11 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
 
   }
   updatePlanet =()=> {
-    const id = Math.floor(Math.random()*19)+3;
-    this.swapiService.getPlanet(id)
+    const itemId = Math.floor(Math.random()*19)+3;
+    this.swapiService.getPlanet(itemId)
     .then((planet) => {
       this.setState({
-        id:planet.id,
+        itemId:planet.itemId,
         name: planet.name,
         population: planet.population,
         rotationPeriod: planet.rotationPeriod,
@@ -63,10 +63,10 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
 
   
   render(): JSX.Element {
-    const { id, name, population, rotationPeriod, diameter, loading, error } = this.state;
+    const { itemId, name, population, rotationPeriod, diameter, loading, error } = this.state;
     const errorMessage = error ? <ErrorIndicator/> : null
     const spinner = loading ? <Spinner/> : null;
-    const content = (!loading && !error) ? <PlanetView  id={id} name={name} population={population} rotationPeriod={rotationPeriod} diameter={diameter}/> : null;
+    const content = (!loading && !error) ? <PlanetView  itemId={itemId} name={name} population={population} rotationPeriod={rotationPeriod} diameter={diameter}/> : null;
     
     return (
       <div className="random-planet jumbotron rounded">
@@ -79,7 +79,7 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
 }
 interface IPlanetProps {
   rotationPeriod:string | null,
-  id: string | number| null;
+  itemId: string | number| null;
   name: string | null;
   population: string | null;
   diameter:string | null;
@@ -87,12 +87,12 @@ interface IPlanetProps {
 
 const PlanetView = (props:IPlanetProps) => {
 
-   const { id, name, population, rotationPeriod, diameter } = props;
+   const { itemId, name, population, rotationPeriod, diameter } = props;
   return(
     <React.Fragment>
         <img
           className="planet-image"
-          src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+          src={`https://starwars-visualguide.com/assets/img/planets/${itemId}.jpg`}
         />
         <div>
           <h4>{name}</h4>

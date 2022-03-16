@@ -10,11 +10,11 @@ export default class SwapiService {
   extractId = (item:IPlanet | IPeople | IStarship)=>{
     const idRegExp = /\/([0-9]*)\/$/;
     const idMatch = item.url.match(idRegExp);
-      let id:string = "";
+      let itemId:string = "";
     if(idMatch != null){
-     id +=idMatch[1]
+      itemId +=idMatch[1]
     }
-    return id
+    return itemId
   }
 
   async getResource(url = ""): Promise<any> {
@@ -27,16 +27,16 @@ export default class SwapiService {
     return res.json();
   }
 
-  getPersonImage = ({id}:ITransfomedPerson | ITransfomedStarship | IrandomPlanet ) => {
-    return `${this.imageBase}/characters/${id}.jpg`
+  getPersonImage = ({itemId}:ITransfomedPerson | ITransfomedStarship | IrandomPlanet ) => {
+    return `${this.imageBase}/characters/${itemId}.jpg`
   };
 
-  getStarshipImage = ({id}:ITransfomedPerson | ITransfomedStarship | IrandomPlanet ) => {
-    return `${this.imageBase}/starships/${id}.jpg`
+  getStarshipImage = ({itemId}:ITransfomedPerson | ITransfomedStarship | IrandomPlanet ) => {
+    return `${this.imageBase}/starships/${itemId}.jpg`
   };
 
-  getPlanetImage = ({id}:ITransfomedPerson | ITransfomedStarship | IrandomPlanet ) => {
-    return `${this.imageBase}/planets/${id}.jpg`
+  getPlanetImage = ({itemId}:ITransfomedPerson | ITransfomedStarship | IrandomPlanet ) => {
+    return `${this.imageBase}/planets/${itemId}.jpg`
   };
 
   //------------PEOPLE------------
@@ -46,14 +46,14 @@ export default class SwapiService {
     return people.map(this.transformPerson);
   }
 
-   getPerson = async(id: string | null): Promise<ITransfomedPerson>=> {
-    const persone: IPeople = await this.getResource(`/people/${id}/`);
+   getPerson = async(itemId: string | null): Promise<ITransfomedPerson>=> {
+    const persone: IPeople = await this.getResource(`/people/${itemId}/`);
     return this.transformPerson(persone);
   }
 
   transformPerson=(person:IPeople):ITransfomedPerson =>{
     return {
-      id: this.extractId(person),
+      itemId: this.extractId(person),
       name: person.name,
       gender: person.gender,
       birthYear: person.birth_year,
@@ -68,16 +68,16 @@ export default class SwapiService {
     return planets.map(this.transformPlanet);
   }
 
-   getPlanet = async(id: string | number):Promise<IrandomPlanet>=> {
-    const planet: IPlanet = await this.getResource(`/planets/${id}/`);
+   getPlanet = async(itemId: string | number):Promise<IrandomPlanet>=> {
+    const planet: IPlanet = await this.getResource(`/planets/${itemId}/`);
     return this.transformPlanet(planet);
 
   }
 
   transformPlanet=(planet:IPlanet):IrandomPlanet=>{
-    const id = this.extractId(planet)
+    const itemId = this.extractId(planet)
         return {
-          id,
+          itemId,
           name: planet.name,
           population: planet.population,
           rotationPeriod: planet.rotation_period,
@@ -92,14 +92,14 @@ export default class SwapiService {
     return starships.map(this.transformStarship);
   }
 
-   getStarship = async (id: string): Promise<ITransfomedStarship> =>{
-    const starship: IStarship = await this.getResource(`/starships/${id}/`);
+   getStarship = async (itemId: string): Promise<ITransfomedStarship> =>{
+    const starship: IStarship = await this.getResource(`/starships/${itemId}/`);
     return this.transformStarship(starship);
   }
 
   transformStarship=(starship:IStarship):ITransfomedStarship=>{
         return {
-          id:this.extractId(starship),
+          itemId:this.extractId(starship),
           name: starship.name,
           model: starship.model,
           manufacturer: starship.manufacturer,

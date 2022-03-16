@@ -71,12 +71,12 @@ const ItemList = (props:IItemListProps) => {
   const { data, onItemSelected, children } = props;
 
   const items = data.map((item) => {
-    const { id } = item;
+    const { itemId } = item;
     const label = children(item) //renderLabel;
 
     return (
       <li className="list-group-item"
-          key={id}
+          key={itemId}
           onClick={() => onItemSelected()}>
         {label}
       </li>

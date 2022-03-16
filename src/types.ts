@@ -24,7 +24,7 @@ import SwapiService from "./services/swapi-service";
 // }
 
 export type IrandomPlanet ={
-  id: string |  null;
+  itemId: string |  null;
   name: string | null;
   population: string | null;
   rotationPeriod: string | null;
@@ -34,14 +34,14 @@ export type IrandomPlanet ={
 }
 
 export interface ITransfomedPerson {
-  id: string | null;
+  itemId: string | null;
   name: string | null;
   gender: string,
   birthYear: string,
   eyeColor: string
 }
 export interface ITransfomedStarship {
-  id: string |  null;
+  itemId: string |  null;
   name: string | null;
   model: string,
   manufacturer: string,
@@ -76,7 +76,7 @@ export interface IItemListState{
 }
 
 export interface IItemListProps{
-  onItemSelected:(id?:string | null )=>void //id?:string | null | number | undefined,
+  onItemSelected:(itemId?:string | null )=>void //id?:string | null | number | undefined,
   getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
   renderItem:(item:any)=>string | undefined
 }
@@ -111,5 +111,5 @@ export interface IwithData{
 
 export interface IWithSevice {
   getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
-  onItemSelected?:(id?:string | null )=>void
+  onItemSelected?:(itemId?:string | null )=>void
 }
