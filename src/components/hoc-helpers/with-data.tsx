@@ -1,35 +1,26 @@
 import React, { Component } from 'react';
-
 import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
-import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from '../../types';
+import { IWithSevice } from '../../types';
 
-export interface IwithData{
-  getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
-}
-
-const withData = ( View:any, getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>):any => {
-  return class extends Component {
+const withData = ( View:any):any => { //getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
+  return class extends Component<IWithSevice> {
 
     state = {
       data: null
     };
 
-    componentDidUpdate(prevProps:any){
-      if( prevProps.getData !== getData){
-        this.update()
-      }
-    }
+    // componentDidUpdate(prevProps:any){
+    //   if( prevProps.getData !== getData){
+    //     this.update()
+    //   }
+    // }
     componentDidMount() {
-      this.update()
-    }
-    update(){
-      getData()
-      .then((data) => {
-        this.setState({
-          data
+      this.props.getData()
+        .then((data) => {
+          this.setState({
+            data
+          });
         });
-      });
     }
 
     render() {

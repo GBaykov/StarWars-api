@@ -105,3 +105,11 @@ export interface IItemDetails{
     getImageUrl:((item: ITransfomedPerson | IrandomPlanet | ITransfomedStarship) => any) | undefined
 }
 
+export interface IwithData{
+  getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
+}
+
+export interface IWithSevice {
+  getData:()=>Promise<ITransfomedPerson[] |  IrandomPlanet[] | ITransfomedStarship[]>
+  onItemSelected?:(id?:string | null )=>void
+}

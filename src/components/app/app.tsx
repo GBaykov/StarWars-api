@@ -2,24 +2,18 @@ import React, { Component } from "react";
 import Header from "../header";
 import RandomPlanet from "../random-planet";
 import "./app.css";
-// import PeoplePage from "../people-page";
 import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
 import Row from "../row";
-import { Record } from "../item-details/item-details";
-import { IrandomPlanet, ITransfomedPerson, ITransfomedStarship } from "../../types";
+
+
 import { SwapiServiceProvider } from '../swapi-service-context';
 import {
-  PersonDetails,
-  // PlanetDetails,
-  // StarshipDetails,
-  PersonList,
   PlanetDetails,
   PlanetList,
   StarshipDetails,
-  StarshipList
 } from '../sw-components';
 import { PeoplePage } from "../pages";
 
