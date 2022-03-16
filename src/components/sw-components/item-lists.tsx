@@ -3,6 +3,7 @@ import ItemList from '../item-list';
 import { withData, withSwapiService } from '../hoc-helpers';
 import SwapiService from '../../services/swapi-service';
 import {  IrandomPlanet, ITransfomedPerson, ITransfomedStarship, IUniversalTransomed } from '../../types';
+import compose from '../hoc-helpers/compose';
 
 
 
@@ -42,15 +43,24 @@ const mapStarshipMethodsToProps = (swapiService:SwapiService) => {
 };
 
 
-const PersonList =  withSwapiService(mapPersonMethodsToProps)(
-  withData(withChildFunction(renderName)(ItemList)))
+const PersonList = compose(
+  withSwapiService(mapPersonMethodsToProps),
+  withData,
+  withChildFunction(renderName)
+)(ItemList);
 
-  const PlanetList =  withSwapiService(mapPlanetMethodsToProps)(
-    withData(withChildFunction(renderName)(ItemList)))
-  
-  
-  const StarshipList = withSwapiService(mapStarshipMethodsToProps)(
-    withData(withChildFunction(renderModelAndName)(ItemList)))
+const PlanetList = compose(
+  withSwapiService(mapPlanetMethodsToProps),
+  withData,
+  withChildFunction(renderName)
+)(ItemList);
+
+const StarshipList = compose(
+    withSwapiService(mapStarshipMethodsToProps),
+    withData,
+    withChildFunction(renderModelAndName)
+  )(ItemList);
+
   
 
 // const PlanetList =  withSwapiService(
