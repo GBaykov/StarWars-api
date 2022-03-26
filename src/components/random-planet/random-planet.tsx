@@ -19,6 +19,10 @@ export default class RandomPlanet extends Component<{}, IrandomPlanet> {
     error:false
   };
 
+  // static defaultProps = {
+  //   updateInterval: 10000
+  // };
+  
   constructor(props: {}) {
     super(props);
 
